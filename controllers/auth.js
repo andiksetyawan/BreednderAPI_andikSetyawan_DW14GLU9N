@@ -59,12 +59,12 @@ exports.register = async(req, res) => {
           name: pet.name,
           gender: pet.gender,
           species_id: pet.spesies.id,
-          age_id: pet.age.id
+          age: pet.age.name
         };
-        console.log("datapet", data_pet);
+       // console.log("datapet", data_pet);
 
         const petq = await Pet.create(data_pet, { transaction: t });
-        console.log("pet", user);
+        //console.log("pet", user);
 
         return { user, pet: petq };
       } catch (error) {
@@ -73,7 +73,7 @@ exports.register = async(req, res) => {
     })
     .then(data => {
       // Transaction has been committed
-      console.log("data", data);
+    //  console.log("data", data);
       const token = jwt.sign({ user_id: data.user.id }, process.env.SECRET_KEY);
       res.json({
         success: true,

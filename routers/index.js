@@ -11,8 +11,7 @@ const pet = require("../controllers/pet");
 
 router.get("/", (req, res) => res.send("homee"));
 router.post("/login", login);
-
-// router.post("/register", register);
+router.post("/register", register);
 
 // router.post("/species", species.store);
 // router.get("/species", species.show);
