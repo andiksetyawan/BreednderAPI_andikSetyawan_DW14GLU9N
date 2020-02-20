@@ -5,7 +5,7 @@ exports.store = async (req, res) => {
   try {
     const species = await Species.create(req.body);
     if (species) {
-      res.status(401).json({
+      res.json({
         success: true,
         message: "Add species success",
         data: species

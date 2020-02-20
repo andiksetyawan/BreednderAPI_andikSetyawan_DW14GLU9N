@@ -13,8 +13,8 @@ router.get("/", (req, res) => res.send("homee"));
 router.post("/login", login);
 router.post("/register", register);
 
-// router.post("/species", species.store);
-// router.get("/species", species.show);
+router.post("/species", species.store);
+router.get("/species", species.show);
 
 //router.get("/pets", auth, pet.show);
 // router.post("/pet", store);
