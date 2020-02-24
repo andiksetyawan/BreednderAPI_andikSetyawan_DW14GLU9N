@@ -13,13 +13,13 @@ exports.show = async (req, res) => {
     if (user) {
       res.json({
         success: true,
-        message: "Load user success",
+        message: "User was successfully loaded",
         data: user
       });
     } else {
       res.status(404).json({
         success: false,
-        message: "Load user fail",
+        message: "Load User data failed",
         data: {}
       });
     }
@@ -27,7 +27,7 @@ exports.show = async (req, res) => {
     console.log(err);
     res.status(404).json({
       success: false,
-      message: "Load user fail",
+      message: "Load User data failed, something went wrong",
       data: {}
     });
   }
@@ -59,7 +59,7 @@ exports.update = async (req, res) => {
 
           res.json({
             success: true,
-            message: "Update User success",
+            message: "User was successfully updated",
             data: user
           });
         } else {
@@ -87,7 +87,7 @@ exports.update = async (req, res) => {
     console.log(err);
     res.status(401).json({
       success: false,
-      message: "update User fail",
+      message: "Update User data failed, something went wrong",
       data: {}
     });
   }
@@ -100,7 +100,7 @@ exports.destroy = async (req, res) => {
     if (user) {
       res.json({
         success: true,
-        message: "delete user success",
+        message: "User was successfully deleted",
         data: { id }
       });
     } else {
@@ -114,7 +114,7 @@ exports.destroy = async (req, res) => {
     console.log(err);
     res.status(404).json({
       success: false,
-      message: "delete user fail",
+      message: "Delete User data failed, something went wrong",
       data: {}
     });
   }

@@ -13,7 +13,7 @@ exports.store = async (req, res) => {
     if (req.level === "admin") {
       res.json({
         success: true,
-        message: "You're admin, can't add payment.",
+        message: "You're admin, can't add payment",
         data: {}
       });
     } else {
@@ -32,7 +32,7 @@ exports.store = async (req, res) => {
         if (payment_return) {
           res.json({
             success: true,
-            message: "Add payment success",
+            message: "Payment data has been created",
             data: payment_return
           });
         } else {
@@ -47,7 +47,7 @@ exports.store = async (req, res) => {
       } else {
         res.json({
           success: true,
-          message: "Add payment fail",
+          message: "Create payment failed",
           data: {}
         });
       }
@@ -56,7 +56,7 @@ exports.store = async (req, res) => {
     console.log("err", err);
     res.json({
       success: true,
-      message: "Add payment fail , something error.",
+      message: "Create payment failed, something went wrong",
       data: {}
     });
   }
@@ -88,7 +88,7 @@ exports.update = async (req, res) => {
         });
         res.json({
           success: true,
-          message: "Update payment success",
+          message: "Payment was successfully updated",
           data: payment_return
         });
       } else {
@@ -109,7 +109,7 @@ exports.update = async (req, res) => {
     console.log("err", err);
     res.json({
       success: false,
-      message: "Update payment fail",
+      message: "Updating failed, something went wrong",
       data: {}
     });
   }

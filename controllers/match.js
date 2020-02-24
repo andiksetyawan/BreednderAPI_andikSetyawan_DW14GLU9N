@@ -78,7 +78,7 @@ exports.show = async (req, res) => {
     console.log(err);
     res.status(404).json({
       success: false,
-      message: "Match not found",
+      message: "Checking match failed, something went wrong",
       data: {}
     });
   }
@@ -135,23 +135,28 @@ exports.store = async (req, res) => {
       if (matchr) {
         res.json({
           success: true,
-          message: "Insert Match success",
+          message: "Match has been created",
           data: matchr
         });
       } else {
         res.status(204).json({
           success: false,
-          message: "Insert Match  failx",
+          message: "Something wrong, please check match data.",
           data: {}
         });
       }
     } else {
+      res.status(204).json({
+        success: false,
+        message: "Create match failed",
+        data: {}
+      });
     }
   } catch (err) {
     console.log("err", err);
     res.status(204).json({
       success: false,
-      message: "Insert Match  fail",
+      message: "Create match failed, something went wrong",
       data: {}
     });
   }

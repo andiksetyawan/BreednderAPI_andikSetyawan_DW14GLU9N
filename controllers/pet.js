@@ -52,10 +52,10 @@ exports.store = async (req, res) => {
             data: pet_return
           });
         } else {
-          //not found payment data
+          
           res.json({
             success: false,
-            message: "Add pet fail",
+            message: "New Pet was successfully created",
             data: {}
           });
         }
@@ -77,7 +77,7 @@ exports.store = async (req, res) => {
     console.log(err);
     res.json({
       success: false,
-      message: "Add pet fail, something error.",
+      message: "Add pet data failed, something went wrong",
       data: {}
     });
   }
@@ -117,7 +117,7 @@ exports.shows = async (req, res) => {
     console.log(err);
     res.status(401).json({
       success: false,
-      message: "load pet fail",
+      message: "Loads pet data failed, something went wrong",
       data: {}
     });
   }
@@ -161,7 +161,7 @@ exports.update = async (req, res) => {
 
           res.json({
             success: true,
-            message: "Update Pet success",
+            message: "Pet was successfully updated",
             data: pet
           });
         } else {
@@ -189,7 +189,7 @@ exports.update = async (req, res) => {
     console.log(err);
     res.status(401).json({
       success: false,
-      message: "update pet fail",
+      message: "Updating pet data failed, something went wrong",
       data: {}
     });
   }
@@ -202,7 +202,7 @@ exports.destroy = async (req, res) => {
     if (pet) {
       res.json({
         success: true,
-        message: "delete Pet success",
+        message: "Pet was successfully deleted",
         data: { id }
       });
     } else {
@@ -216,7 +216,7 @@ exports.destroy = async (req, res) => {
     console.log(err);
     res.status(404).json({
       success: false,
-      message: "delete pet fail",
+      message: "Deleting pet data failed, something went wrong",
       data: {}
     });
   }
@@ -244,7 +244,7 @@ exports.show = async (req, res) => {
     if (pet) {
       res.json({
         success: true,
-        message: "Load Pet success",
+        message: "Pet was successfully loaded",
         data: pet
       });
     } else {
@@ -258,7 +258,7 @@ exports.show = async (req, res) => {
     console.log(err);
     res.status(404).json({
       success: false,
-      message: "load pet fail",
+      message: "Load pet data failed, something went wrong",
       data: {}
     });
   }

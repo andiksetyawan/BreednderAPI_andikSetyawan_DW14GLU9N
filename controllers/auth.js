@@ -13,24 +13,27 @@ exports.login = async (req, res) => {
     const user = await User.findOne({ where: { email } });
     if (user) {
       const match = await bcrypt.compare(password, user.password);
-      if(match){
+      if (match) {
         const token = jwt.sign({ user_id: user.id }, process.env.SECRET_KEY);
         res.json({
           success: true,
           message: "Login success",
           data: { email, token }
         });
-      }else{
+      } else {
+        //invalid email
+
         res.status(401).json({
           success: false,
-          message: "Invalid login, password wrong",
+          message: "Invalid login credentials. please try again",
           data: {}
         });
       }
-    }else{
+    } else {
+      //invalid password
       res.status(401).json({
         success: false,
-        message: "Invalid login, email wrong",
+        message: "Invalid login credentials. please try again",
         data: {}
       });
     }
@@ -38,13 +41,13 @@ exports.login = async (req, res) => {
     console.log(err);
     res.status(401).json({
       success: false,
-      message: "Invalid Login",
+      message: "Login failed, something went wrong",
       data: {}
     });
   }
 };
 
-exports.register = async(req, res) => {
+exports.register = async (req, res) => {
   //const  user = req.body;
   const { pet } = req.body;
   models.sequelize
@@ -61,87 +64,46 @@ exports.register = async(req, res) => {
           species_id: pet.spesies.id,
           age: pet.age.name
         };
-       // console.log("datapet", data_pet);
+        // console.log("datapet", data_pet);
 
         const petq = await Pet.create(data_pet, { transaction: t });
         //console.log("pet", user);
 
         return { user, pet: petq };
       } catch (error) {
-        console.log("error", error.errno)
+        console.log("error", error.name);
         throw new Error(error.name);
       }
     })
     .then(data => {
       // Transaction has been committed
-    //  console.log("data", data);
+      //  console.log("data", data);
       const token = jwt.sign({ user_id: data.user.id }, process.env.SECRET_KEY);
       res.json({
         success: true,
-        message: "Register success",
+        message: "Your account was successfully created",
         data: { email: data.user.email, token }
       });
     })
     .catch(err => {
-      console.log("err", err.name);
       // Transaction has been rolled back
-      res.json({
-        success: false,
-        message: "Register fail",
-        data: { }
-      });
-    });
-};
-
-exports.register111 = async (req, res) => {
-  try {
-    const { pet } = req.body;
-
-    const user = await User.create(req.body);
-    if (user) {
-      const data_pet = {
-        user_id: user.dataValues.id,
-        name: pet.name,
-        gender: pet.gender,
-        species_id: pet.spesies.id,
-        age_id: pet.age.id
-      };
-
-      const pets = await Pet.create(data_pet);
-      if (pet) {
-        console.log(pets);
-        const token = jwt.sign(
-          { user_id: user.dataValues.id },
-          process.env.SECRET_KEY
-        );
+      if (err.message == "SequelizeUniqueConstraintError") {
         res.json({
-          success: true,
-          message: "Register success",
-          data: { email: user.dataValues.email, token }
+          success: false,
+          message: "Email is already registered",
+          data: {}
         });
       } else {
-        res.status(400).json({
+        res.json({
           success: false,
-          message: "Register failed",
+          message: "Register failed, something went wrong",
           data: {}
         });
       }
-    } else {
-      res.status(400).json({
-        success: false,
-        message: "Register failed",
-        data: {}
-      });
-    }
-  } catch (err) {
-    res.status(400).json({
-      success: false,
-      message: "Register failed",
-      data: {}
     });
-  }
 };
 
+//////
 exports.genpasshash = async (req, res) => {
   console.log("sdfs");
   const saltRounds = 10;
