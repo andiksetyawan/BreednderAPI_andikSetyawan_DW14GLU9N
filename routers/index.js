@@ -10,7 +10,7 @@ const { login, register } = require("../controllers/auth");
 const species = require("../controllers/species");
 const pet = require("../controllers/pet");
 const user = require("../controllers/user");
-
+const match = require("../controllers/match");
 
 router.get("/", (req, res) => res.send("homee"));
 router.post("/login", login);
@@ -23,12 +23,18 @@ router.get("/pets", pet.shows);
 router.post("/pet", auth, pet.store);
 router.put("/pet/:id", auth, pet.update);
 router.delete("/pet/:id", auth, pet.destroy);
+
 router.get("/pet/:id", auth, pet.show);
 
 router.get("/user/:id", auth, user.show);
 router.put("/user/:id", auth, user.update);
 router.delete("/user/:id", auth, user.destroy);
 
+// router.get("/match", auth, ()=>res.send("sdsd"));
+router.get("/match", auth, match.show);
+router.post("/match", auth, match.store);
+router.patch("/match/:id", auth, match.update);
+router.get("/matches", auth, match.shows); //get matches true status
 
 
 ////
