@@ -11,6 +11,7 @@ const species = require("../controllers/species");
 const pet = require("../controllers/pet");
 const user = require("../controllers/user");
 const match = require("../controllers/match");
+const payment = require("../controllers/payment");
 
 router.get("/", (req, res) => res.send("homee"));
 router.post("/login", login);
@@ -36,6 +37,9 @@ router.post("/match", auth, match.store);
 router.patch("/match/:id", auth, match.update);
 router.get("/matches", auth, match.shows); //get matches true status
 
+
+router.post("/payment", auth, payment.store);
+router.put("/payment/:id", auth, payment.update);
 
 ////
 // router.get("/gethash", genpasshash);
