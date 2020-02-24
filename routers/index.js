@@ -9,6 +9,7 @@ const { login, register } = require("../controllers/auth");
 
 const species = require("../controllers/species");
 const pet = require("../controllers/pet");
+const user = require("../controllers/user");
 
 
 router.get("/", (req, res) => res.send("homee"));
@@ -22,8 +23,16 @@ router.get("/pets", pet.shows);
 router.post("/pet", auth, pet.store);
 router.put("/pet/:id", auth, pet.update);
 router.delete("/pet/:id", auth, pet.destroy);
-
 router.get("/pet/:id", auth, pet.show);
 
+router.get("/user/:id", auth, user.show);
+router.put("/user/:id", auth, user.update);
+router.delete("/user/:id", auth, user.destroy);
+
+
+
+////
+// router.get("/gethash", genpasshash);
+// router.post("/register1", register111);
 
 module.exports = router;
