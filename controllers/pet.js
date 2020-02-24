@@ -222,3 +222,44 @@ exports.destroy = async (req, res) => {
   }
 };
 
+exports.show = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const pet = await Pet.findOne({
+      attributes: { exclude: ["species_id", "user_id"] },
+      where: { id },
+      include: [
+        {
+          model: Species,
+          // as: "spesies"
+          attributes: ["id", "name"]
+        },
+        {
+          model: User,
+          // as: "user"
+          attributes: ["id", "name", "address", "phone"]
+        }
+      ]
+    });
+    if (pet) {
+      res.json({
+        success: true,
+        message: "Load Pet success",
+        data: pet
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        message: "Load pet fail",
+        data: {}
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(404).json({
+      success: false,
+      message: "load pet fail",
+      data: {}
+    });
+  }
+};

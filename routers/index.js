@@ -23,4 +23,7 @@ router.post("/pet", auth, pet.store);
 router.put("/pet/:id", auth, pet.update);
 router.delete("/pet/:id", auth, pet.destroy);
 
+router.get("/pet/:id", auth, pet.show);
+
+
 module.exports = router;
