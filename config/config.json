@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "malang",
-    "database": "dw_5",
+    "database": "dw_6",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "operatorsAliases": false

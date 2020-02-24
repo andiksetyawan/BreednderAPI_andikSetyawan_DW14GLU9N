@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      breeder: {
+      name: {
         allowNull: false,
         type: Sequelize.STRING
       },
@@ -28,6 +28,11 @@ module.exports = {
       phone: {
         allowNull: false,
         type: Sequelize.STRING
+      },
+      level: {
+        type: Sequelize.ENUM,
+        values: ["client", "admin"],
+        defaultValue: "client"
       },
       createdAt: {
         allowNull: false,

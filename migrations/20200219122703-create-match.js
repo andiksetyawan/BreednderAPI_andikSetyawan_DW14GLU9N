@@ -10,17 +10,7 @@ module.exports = {
       },
       status: {
         type: Sequelize.BOOLEAN,
-        allowNull: false
-      },
-      user_id: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: "users",
-          key: "id"
-        },
-        onUpdate: "cascade",
-        onDelete: "cascade"
+        allowNull:false
       },
       pet_id: {
         allowNull: false,
@@ -32,7 +22,7 @@ module.exports = {
         onUpdate: "cascade",
         onDelete: "cascade"
       },
-      pet_liked: {
+      pet_like: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {

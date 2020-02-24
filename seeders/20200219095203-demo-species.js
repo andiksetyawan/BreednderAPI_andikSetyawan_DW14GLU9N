@@ -16,7 +16,7 @@ module.exports = {
       "species",
       [
         {
-          name: "Cat",
+          name: "Dog",
           createdAt: new Date(),
           updatedAt: new Date()
         }

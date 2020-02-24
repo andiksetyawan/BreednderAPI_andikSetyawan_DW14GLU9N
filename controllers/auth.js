@@ -17,7 +17,7 @@ exports.login = async (req, res) => {
         const token = jwt.sign({ user_id: user.id }, process.env.SECRET_KEY);
         res.json({
           success: true,
-          message: "Login berhasil",
+          message: "Login success",
           data: { email, token }
         });
       }else{
@@ -68,7 +68,8 @@ exports.register = async(req, res) => {
 
         return { user, pet: petq };
       } catch (error) {
-        throw new Error();
+        console.log("error", error.errno)
+        throw new Error(error.name);
       }
     })
     .then(data => {
@@ -82,12 +83,12 @@ exports.register = async(req, res) => {
       });
     })
     .catch(err => {
-      console.log("err", err);
+      console.log("err", err.name);
       // Transaction has been rolled back
       res.json({
         success: false,
         message: "Register fail",
-        data: { sdfs: "sd" }
+        data: { }
       });
     });
 };

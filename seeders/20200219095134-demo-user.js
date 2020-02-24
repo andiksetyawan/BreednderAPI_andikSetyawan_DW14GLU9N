@@ -16,7 +16,7 @@ module.exports = {
       "users",
       [
         {
-          breeder: "John Doe",
+          name: "John Doe",
           email: "test@gmail.com",
           password: "$2b$10$dpn1IZOfxPZhYFoGvftZcOzo140hFIwgHNPWyJqypVHc7VJqj7cRG",//1234
           address: "Jalan Elang VI",
@@ -25,7 +25,7 @@ module.exports = {
           updatedAt: new Date()
         },
         {
-          breeder: "John Doe 2",
+          name: "John Doe 2",
           email: "test2@gmail.com",
           password: "$2b$10$dpn1IZOfxPZhYFoGvftZcOzo140hFIwgHNPWyJqypVHc7VJqj7cRG",//1234
           address: "Jalan Elang VI 2",

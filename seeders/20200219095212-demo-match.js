@@ -16,10 +16,9 @@ module.exports = {
       "matches",
       [
         {
-          user_id: 1,
           pet_id: 1,
-          pet_liked: 2,
-          status: true,
+          pet_like: 2,
+          status: false,
           createdAt: new Date(),
           updatedAt: new Date()
         }

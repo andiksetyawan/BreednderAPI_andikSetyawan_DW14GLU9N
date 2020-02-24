@@ -16,7 +16,8 @@ module.exports = {
       },
       status: {
         type: Sequelize.ENUM,
-        values: ["free", "premium"]
+        values: ["free", "premium"],
+        defaultValue: "free"
       },
       user_id: {
         allowNull: false,
