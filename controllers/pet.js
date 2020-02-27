@@ -17,11 +17,12 @@ exports.store = async (req, res) => {
       about_pet: pet.about_pet,
       photo: pet.photo
     };
+    console.log(data_pet);
 
     const check_payment = await Payment.findOne({
       where: { user_id: pet.user.id }
     });
-  //  console.log("cek ==== ", check_payment.status);
+    //console.log("cek ==== ", pet.user.id);
     if (check_payment) {
       if (check_payment.status === "premium") {
         const petq = await Pet.create(data_pet);
@@ -52,7 +53,6 @@ exports.store = async (req, res) => {
             data: pet_return
           });
         } else {
-          
           res.json({
             success: false,
             message: "New Pet was successfully created",
@@ -69,7 +69,7 @@ exports.store = async (req, res) => {
     } else {
       res.json({
         success: false,
-        message: "Add pet fail",
+        message: "Add pet fail, not found payment data",
         data: {}
       });
     }
@@ -125,7 +125,6 @@ exports.shows = async (req, res) => {
 
 exports.update = async (req, res) => {
   console.log(req.params);
-
 
   const { id } = req.params;
   try {

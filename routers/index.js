@@ -5,7 +5,7 @@ const router = express.Router();
 
 const { auth } = require("../middlewares/auth");
 
-const { login, register } = require("../controllers/auth");
+const { login, register, autoAuth } = require("../controllers/auth");
 
 const species = require("../controllers/species");
 const pet = require("../controllers/pet");
@@ -16,6 +16,7 @@ const payment = require("../controllers/payment");
 router.get("/", (req, res) => res.send("homee"));
 router.post("/login", login);
 router.post("/register", register);
+router.get("/autoauth", auth, autoAuth);
 
 router.post("/species", species.store);
 router.get("/species", species.show);
@@ -36,7 +37,6 @@ router.get("/match", auth, match.show);
 router.post("/match", auth, match.store);
 router.patch("/match/:id", auth, match.update);
 router.get("/matches", auth, match.shows); //get matches true status
-
 
 router.post("/payment", auth, payment.store);
 router.put("/payment/:id", auth, payment.update);

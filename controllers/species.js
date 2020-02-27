@@ -41,7 +41,7 @@ exports.show = async (req, res) => {
   try {
     const species = await Species.findAll();
     if (species) {
-      res.status(401).json({
+      res.json({
         success: true,
         message: "Species data was succesfully loaded",
         data: species

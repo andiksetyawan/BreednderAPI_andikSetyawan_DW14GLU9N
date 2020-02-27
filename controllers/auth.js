@@ -7,6 +7,31 @@ const Pet = models.pet;
 
 const bcrypt = require("bcrypt");
 
+exports.autoAuth = async (req, res) => {
+  try {
+    const user = await User.findOne({ where: { id: req.user } });
+    if (user) {
+      res.json({
+        success: true,
+        message: "Login success",
+        data: { id: user.id, email: user.email, token: req.token }
+      });
+    } else {
+      res.status(401).json({
+        success: false,
+        message: "Invalid login credentials. Please relogin",
+        data: {}
+      });
+    }
+  } catch (error) {
+    res.status(401).json({
+      success: false,
+      message: "Invalid login credentials. please relogin",
+      data: {}
+    });
+  }
+};
+
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -18,7 +43,7 @@ exports.login = async (req, res) => {
         res.json({
           success: true,
           message: "Login success",
-          data: { email, token }
+          data: { id: user.id, email: user.email, token }
         });
       } else {
         //invalid email
@@ -49,6 +74,7 @@ exports.login = async (req, res) => {
 
 exports.register = async (req, res) => {
   //const  user = req.body;
+  console.log("body", req.body);
   const { pet } = req.body;
   models.sequelize
     .transaction(async t => {
@@ -61,8 +87,8 @@ exports.register = async (req, res) => {
           user_id: user.id,
           name: pet.name,
           gender: pet.gender,
-          species_id: pet.spesies.id,
-          age: pet.age.name
+          species_id: pet.species,
+          age: pet.age
         };
         // console.log("datapet", data_pet);
 
@@ -71,7 +97,7 @@ exports.register = async (req, res) => {
 
         return { user, pet: petq };
       } catch (error) {
-        console.log("error", error.name);
+        console.log("error", error);
         throw new Error(error.name);
       }
     })
@@ -82,19 +108,19 @@ exports.register = async (req, res) => {
       res.json({
         success: true,
         message: "Your account was successfully created",
-        data: { email: data.user.email, token }
+        data: { id: data.user.id, email: data.user.email, token }
       });
     })
     .catch(err => {
       // Transaction has been rolled back
       if (err.message == "SequelizeUniqueConstraintError") {
-        res.json({
+        res.status(400).json({
           success: false,
           message: "Email is already registered",
           data: {}
         });
       } else {
-        res.json({
+        res.status(400).json({
           success: false,
           message: "Register failed, something went wrong",
           data: {}
