@@ -24,7 +24,9 @@ module.exports = {
         values: ["child", "adult"]
       },
       photo: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        defaultValue:
+          "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/socialmedia/apple/237/dog-face_1f436.png"
       },
       species_id: {
         allowNull: false,

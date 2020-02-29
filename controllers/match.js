@@ -139,14 +139,14 @@ exports.store = async (req, res) => {
           data: matchr
         });
       } else {
-        res.status(204).json({
+        res.status(404).json({
           success: false,
           message: "Something wrong, please check match data.",
           data: {}
         });
       }
     } else {
-      res.status(204).json({
+      res.status(404).json({
         success: false,
         message: "Create match failed",
         data: {}
@@ -154,7 +154,7 @@ exports.store = async (req, res) => {
     }
   } catch (err) {
     console.log("err", err);
-    res.status(204).json({
+    res.status(404).json({
       success: false,
       message: "Create match failed, something went wrong",
       data: {}
@@ -297,7 +297,7 @@ exports.shows = async (req, res) => {
       ]
     });
     console.log("match", match);
-    if (match && match.length > 0) {
+    if (match) {
       res.json({
         success: true,
         message: "Load Matched Pet success",
@@ -312,7 +312,7 @@ exports.shows = async (req, res) => {
     }
   } catch (err) {
     console.log(err);
-    res.status(204).json({
+    res.status(404).json({
       success: false,
       message: "load Matched pet fail",
       data: {}

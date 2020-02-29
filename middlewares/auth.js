@@ -22,7 +22,7 @@ exports.auth = async (req, res, next) => {
     console.log(err);
     res.status(403).json({
       success: false,
-      message: "Token not foundd",
+      message: "Token not found",
       data: {}
     });
   }

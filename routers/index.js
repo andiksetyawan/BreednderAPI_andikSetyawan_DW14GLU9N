@@ -22,11 +22,16 @@ router.post("/species", species.store);
 router.get("/species", species.show);
 
 router.get("/pets", pet.shows);
+router.get("/pets/user/:id", pet.showsByUser);
+
 router.post("/pet", auth, pet.store);
 router.put("/pet/:id", auth, pet.update);
 router.delete("/pet/:id", auth, pet.destroy);
 
 router.get("/pet/:id", auth, pet.show);
+
+router.get("/pet/generate_matching/:id", auth, pet.generate_matching);
+
 
 router.get("/user/:id", auth, user.show);
 router.put("/user/:id", auth, user.update);
@@ -40,6 +45,7 @@ router.get("/matches", auth, match.shows); //get matches true status
 
 router.post("/payment", auth, payment.store);
 router.put("/payment/:id", auth, payment.update);
+router.get("/payment", auth, payment.show);
 
 ////
 // router.get("/gethash", genpasshash);

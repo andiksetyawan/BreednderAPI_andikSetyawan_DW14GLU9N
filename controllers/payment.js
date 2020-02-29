@@ -114,3 +114,38 @@ exports.update = async (req, res) => {
     });
   }
 };
+
+exports.show = async (req, res) => {
+  try {
+    const payment = await Payment.findOne({
+      where: { user_id: req.user },
+      attributes: { exclude: ["user_id"] },
+      include: [
+        {
+          model: User,
+          attributes: { exclude: ["password", "level"] }
+        }
+      ]
+    });
+    if (payment) {
+      res.json({
+        success: true,
+        message: "match data was succesfully loaded",
+        data: payment
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        message: "data match not found",
+        data: {}
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(401).json({
+      success: false,
+      message: "match data failed, something went wrong",
+      data: {}
+    });
+  }
+};
